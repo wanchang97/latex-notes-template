@@ -1,7 +1,6 @@
 \documentclass[11pt]{article}
-%\usepackage{styles/notes}
-%\usepackage{/Users/wanchang/Documents/GitHub/latex-notes-template/styles/notes}
-\usepackage{../../styles/notes}
+\usepackage{/Users/wanchang/Documents/GitHub/latex-notes-template/styles/notes}
+
 \title{测试笔记 - LaTeX 模板验证}
 \author{你的名字}
 \date{\today}
@@ -25,7 +24,8 @@
 	x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 	\]
 	
-	\subsection{数学环境}
+	\section{数学环境测试}
+	
 	\begin{definition}[导数]
 		函数 $f(x)$ 在点 $x_0$ 处的导数定义为：
 		\[
@@ -48,7 +48,6 @@
 	
 	\begin{lstlisting}[style=python, caption=Python示例]
 		import numpy as np
-		import matplotlib.pyplot as plt
 		
 		def calculate_quadratic(a, b, c, x):
 		"""计算二次函数值"""
@@ -58,9 +57,17 @@
 		x = np.linspace(-10, 10, 100)
 		y = calculate_quadratic(1, -3, 2, x)
 		
-		plt.plot(x, y)
-		plt.title("Quadratic Function")
-		plt.show()
+		print("计算完成")
+	\end{lstlisting}
+	
+	\begin{lstlisting}[style=javascript, caption=JavaScript示例]
+		function fibonacci(n) {
+			if (n <= 1) return n;
+			return fibonacci(n - 1) + fibonacci(n - 2);
+		}
+		
+		// 调用函数
+		console.log(fibonacci(10));
 	\end{lstlisting}
 	
 	\section{笔记功能测试}
@@ -83,8 +90,10 @@
 	\begin{itemize}
 		\item LaTeX 编译功能
 		\item 数学公式渲染
-		\item 代码高亮显示
+		\item 数学环境（定义、定理、证明等）
+		\item 代码高亮显示（Python 和 JavaScript）
 		\item 自定义笔记环境
+		\item 中文支持
 		\item GitHub Actions 自动部署
 	\end{itemize}
 	

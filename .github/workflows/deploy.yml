@@ -1,70 +1,214 @@
-name: Build and Deploy Notes
+name: Build and Deploy LaTeX Notes
 
 on:
-push:
-branches: [ main, master ]
-pull_request:
-branches: [ main, master ]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  BUILD_DIR: public
 
 jobs:
-build:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout
-uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 步骤1: 获取代码
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # 获取所有历史，便于获取文件修改时间
 
-- name: Setup TeX Live
-uses: xu-cheng/latex-action@v2
-with:
-root_file: notes/**/main.tex
-args: -shell-escape -interaction=nonstopmode
+    # 步骤2: 安装 LaTeX 环境
+    - name: Setup LaTeX environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          texlive-latex-base \
+          texlive-latex-extra \
+          texlive-latex-recommended \
+          texlive-fonts-recommended \
+          texlive-fonts-extra \
+          texlive-lang-chinese \
+          texlive-science \
+          texlive-pictures
 
-- name: Compile all notes
-run: |
-find notes -name "main.tex" | while read note; do
-dir=$(dirname "$note")
-name=$(basename "$dir")
-cd "$dir"
-latexmk -pdf -interaction=nonstopmode main.tex
-mkdir -p ../../public/notes
-cp main.pdf "../../public/notes/${name}.pdf"
-cd -
-done
+    # 步骤3: 编译所有笔记
+    - name: Compile all notes
+      run: |
+        mkdir -p $BUILD_DIR/notes
+        
+        # 查找所有笔记主文件并编译
+        find notes -name "main.tex" -type f | while read texfile; do
+          dir=$(dirname "$texfile")
+          name=$(basename "$dir")
+          echo "📝 编译笔记: $name"
+          
+          # 进入笔记目录编译
+          cd "$dir"
+          
+          # 设置搜索路径并编译（使用 pdflatex，云端环境已配置好中文）
+          TEXINPUTS="../../styles:" pdflatex -interaction=nonstopmode main.tex
+          
+          # 检查是否编译成功
+          if [ -f "main.pdf" ]; then
+            cp main.pdf "../../$BUILD_DIR/notes/${name}.pdf"
+            echo "✅ 成功: $name"
+          else
+            echo "❌ 失败: $name"
+          fi
+          
+          # 返回项目根目录
+          cd - > /dev/null
+        done
 
-- name: Generate index page
-run: |
-cat > public/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head>
-<title>My Study Notes</title>
-<style>
-body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; }
-.note { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
-.date { color: #666; font-size: 0.9em; }
-</style>
-</head>
-<body>
-<h1>My Study Notes</h1>
-<p>Automatically generated from LaTeX source.</p>
-<div id="notes-list">
-EOF
+    # 步骤4: 生成索引页面
+    - name: Generate index page
+      run: |
+        cat > $BUILD_DIR/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html lang="zh-CN">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>我的学习笔记</title>
+            <style>
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                    line-height: 1.6;
+                    margin: 0;
+                    padding: 20px;
+                    background: #f5f5f5;
+                    color: #333;
+                }
+                .container {
+                    max-width: 800px;
+                    margin: 0 auto;
+                    background: white;
+                    padding: 30px;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                }
+                header {
+                    text-align: center;
+                    margin-bottom: 40px;
+                    border-bottom: 2px solid #eaeaea;
+                    padding-bottom: 20px;
+                }
+                h1 {
+                    color: #2c3e50;
+                    margin-bottom: 10px;
+                }
+                .subtitle {
+                    color: #7f8c8d;
+                    font-size: 1.1em;
+                }
+                .notes-grid {
+                    display: grid;
+                    gap: 20px;
+                }
+                .note-card {
+                    border: 1px solid #e0e0e0;
+                    border-radius: 8px;
+                    padding: 20px;
+                    background: #fafafa;
+                    transition: all 0.3s ease;
+                }
+                .note-card:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                    border-color: #3498db;
+                }
+                .note-title {
+                    color: #2c3e50;
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                }
+                .note-link {
+                    display: inline-block;
+                    background: #3498db;
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    margin-top: 10px;
+                    transition: background 0.3s ease;
+                }
+                .note-link:hover {
+                    background: #2980b9;
+                }
+                .last-updated {
+                    font-size: 0.9em;
+                    color: #7f8c8d;
+                    margin-top: 10px;
+                }
+                .empty-state {
+                    text-align: center;
+                    padding: 40px;
+                    color: #7f8c8d;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <header>
+                    <h1>📚 我的学习笔记</h1>
+                    <p class="subtitle">自动从 LaTeX 源码生成 • 最后更新: <span id="update-date"></span></p>
+                </header>
+                
+                <div class="notes-grid" id="notes-container">
+        EOF
+        
+        # 动态添加笔记卡片
+        find notes -name "main.tex" | while read texfile; do
+          dir=$(dirname "$texfile")
+          name=$(basename "$dir")
+          
+          # 从LaTeX文件中提取标题（如果存在）
+          title=$(grep -m 1 '\\title{' "$texfile" | sed 's/.*{//' | sed 's/}.*//' 2>/dev/null || echo "$name")
+          # 获取最后修改时间
+          last_modified=$(git log -1 --format="%cd" --date=short "$texfile" 2>/dev/null || echo "未知")
+          
+          cat >> $BUILD_DIR/index.html << EOF
+                    <div class="note-card">
+                        <h3 class="note-title">$title</h3>
+                        <p>自动生成的笔记PDF文件</p>
+                        <a href="notes/${name}.pdf" class="note-link" target="_blank">查看PDF</a>
+                        <div class="last-updated">更新: $last_modified</div>
+                    </div>
+        EOF
+        done
+        
+        # 如果没有找到笔记
+        if [ -z "$(find notes -name "main.tex")" ]; then
+          cat >> $BUILD_DIR/index.html << EOF
+                    <div class="empty-state">
+                        <h3>还没有笔记</h3>
+                        <p>在 notes/ 目录下创建你的第一个笔记吧！</p>
+                    </div>
+        EOF
+        fi
+        
+        cat >> $BUILD_DIR/index.html << 'EOF'
+                </div>
+            </div>
+            
+            <script>
+                // 显示当前日期
+                document.getElementById('update-date').textContent = new Date().toLocaleDateString('zh-CN');
+                
+                // 简单的搜索功能（可选）
+                console.log('笔记系统已加载完成！');
+            </script>
+        </body>
+        </html>
+        EOF
 
-find notes -name "main.tex" | while read note; do
-dir=$(dirname "$note")
-name=$(basename "$dir")
-title=$(grep -m 1 '\\title' "$note" | sed 's/\\title{//' | sed 's/}//' || echo "$name")
-echo "<div class='note'><h3><a href='notes/${name}.pdf'>$title</a></h3></div>" >> public/index.html
-done
-
-cat >> public/index.html << 'EOF'
-</div>
-</body>
-</html>
-EOF
-
-- name: Deploy to GitHub Pages
-uses: peaceiris/actions-gh-pages@v3
-with:
-github_token: ${{ secrets.GITHUB_TOKEN }}
-publish_dir: ./public
+    # 步骤5: 部署到 GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        force_orphan: true  # 每次部署都清理旧文件
