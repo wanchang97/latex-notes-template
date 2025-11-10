@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}
+\usepackage{../../styles/notes}
+
+\title{测试笔记 - LaTeX 模板验证}
+\author{你的名字}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		这是一个测试笔记，用于验证 LaTeX 模板和 GitHub Pages 部署是否正常工作。
+	\end{abstract}
+	
+	\section{数学公式测试}
+	
+	\subsection{行内公式}
+	爱因斯坦的质能方程：$E = mc^2$。
+	
+	\subsection{行间公式}
+	二次方程求根公式：
+	\[
+	x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+	\]
+	
+	\subsection{数学环境}
+	\begin{definition}[导数]
+		函数 $f(x)$ 在点 $x_0$ 处的导数定义为：
+		\[
+		f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}
+		\]
+	\end{definition}
+	
+	\begin{theorem}[勾股定理]
+		在直角三角形中，斜边的平方等于两直角边的平方和：
+		\[
+		a^2 + b^2 = c^2
+		\]
+	\end{theorem}
+	
+	\begin{proof}
+		通过面积法可以证明此定理。
+	\end{proof}
+	
+	\section{代码测试}
+	
+	\begin{lstlisting}[style=python, caption=Python示例]
+		import numpy as np
+		import matplotlib.pyplot as plt
+		
+		def calculate_quadratic(a, b, c, x):
+		"""计算二次函数值"""
+		return a*x**2 + b*x + c
+		
+		# 生成数据
+		x = np.linspace(-10, 10, 100)
+		y = calculate_quadratic(1, -3, 2, x)
+		
+		plt.plot(x, y)
+		plt.title("Quadratic Function")
+		plt.show()
+	\end{lstlisting}
+	
+	\section{笔记功能测试}
+	
+	\begin{note}
+		这是一个普通的笔记框，用于记录重要信息。
+	\end{note}
+	
+	\begin{important}
+		这是一个重要的笔记框，用于强调关键概念。
+	\end{important}
+	
+	\begin{warning}
+		这是一个警告框，用于提醒注意事项。
+	\end{warning}
+	
+	\section{结论}
+	
+	这个测试笔记验证了：
+	\begin{itemize}
+		\item LaTeX 编译功能
+		\item 数学公式渲染
+		\item 代码高亮显示
+		\item 自定义笔记环境
+		\item GitHub Actions 自动部署
+	\end{itemize}
+	
+\end{document}
