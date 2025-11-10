@@ -3,33 +3,88 @@
 \ProvidesPackage{styles/code}[2024/01/01 Code configuration for notes]
 
 \RequirePackage{listings}
-\RequirePackage{minted}
+\RequirePackage{xcolor}
 
 % 代码样式设置
-\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{codeback}{rgb}{0.95,0.95,0.97}
+\definecolor{codeframe}{rgb}{0.92,0.92,0.94}
+\definecolor{keyword}{rgb}{0.13,0.29,0.53}
+\definecolor{comment}{rgb}{0.25,0.50,0.31}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+\definecolor{number}{rgb}{0.50,0.00,0.50}
 
+% 基础列表设置
 \lstset{
-	backgroundcolor=\color{codebg},
+	backgroundcolor=\color{codeback},
 	basicstyle=\ttfamily\footnotesize,
 	breaklines=true,
 	frame=single,
+	rulecolor=\color{codeframe},
 	numbers=left,
 	numberstyle=\tiny\color{gray},
-	keywordstyle=\color{blue},
-	commentstyle=\color{green!50!black},
-	stringstyle=\color{red},
-	showstringspaces=false
+	keywordstyle=\color{keyword},
+	commentstyle=\color{comment},
+	stringstyle=\color{string},
+	showstringspaces=false,
+	tabsize=4,
+	captionpos=b
 }
 
-% 编程语言定义
+% Python 样式定义
 \lstdefinestyle{python}{
 	language=Python,
-	morekeywords={as, async, await, with, yield}
+	morekeywords={and, as, assert, async, await, break, class, continue, def,
+		del, elif, else, except, False, finally, for, from, global, if,
+		import, in, is, lambda, None, nonlocal, not, or, pass, raise,
+		return, True, try, while, with, yield},
+	morecomment=[l]{\#},
+	morestring=[b]',
+	morestring=[b]"
 }
 
+% JavaScript 样式定义
 \lstdefinestyle{javascript}{
 	language=JavaScript,
-	morekeywords={let, const, async, await}
+	morekeywords={break, case, catch, class, const, continue, debugger,
+		default, delete, do, else, export, extends, finally, for,
+		function, if, import, in, instanceof, let, new, return, super,
+		switch, this, throw, try, typeof, var, void, while, with, yield},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]',
+	morestring=[b]"
+}
+
+% Java 样式定义
+\lstdefinestyle{java}{
+	language=Java,
+	morekeywords={abstract, assert, boolean, break, byte, case, catch, char,
+		class, const, continue, default, do, double, else, enum, extends,
+		final, finally, float, for, goto, if, implements, import, instanceof,
+		int, interface, long, native, new, package, private, protected,
+		public, return, short, static, strictfp, super, switch, synchronized,
+		this, throw, throws, transient, try, void, volatile, while},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]"
+}
+
+% C++ 样式定义
+\lstdefinestyle{cpp}{
+	language=C++,
+	morekeywords={alignas, alignof, and, and_eq, asm, auto, bitand, bitor, bool,
+		break, case, catch, char, char16_t, char32_t, class, compl, const,
+		constexpr, const_cast, continue, decltype, default, delete, do, double,
+		dynamic_cast, else, enum, explicit, export, extern, false, float, for,
+		friend, goto, if, inline, int, long, mutable, namespace, new, noexcept,
+		not, not_eq, nullptr, operator, or, or_eq, private, protected, public,
+		register, reinterpret_cast, return, short, signed, sizeof, static,
+		static_assert, static_cast, struct, switch, template, this, thread_local,
+		throw, true, try, typedef, typeid, typename, union, unsigned, using,
+		virtual, void, volatile, wchar_t, while, xor, xor_eq},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]"
 }
 
 \endinput

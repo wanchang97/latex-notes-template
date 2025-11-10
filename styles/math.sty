@@ -1,20 +1,24 @@
 % styles/math.sty
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{styles/math}[2024/01/01 Math configuration for notes]
+\ProvidesPackage{../../styles/math}[2024/01/01 Math configuration for notes]
 
 \RequirePackage{amsmath, amssymb, amsthm}
 \RequirePackage{bm}
 \RequirePackage{mathtools}
-\RequirePackage{physics}
 
-% 数学环境
+% 正确设置数学环境
+\theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
 
 % 常用数学命令
 \newcommand{\R}{\mathbb{R}}

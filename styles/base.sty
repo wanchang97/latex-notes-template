@@ -1,10 +1,17 @@
-% styles/base.sty
+% styles/base-xetex.sty
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{styles/base}[2024/01/01 Base configuration for notes]
+\ProvidesPackage{../../styles/base}[2024/01/01 Base configuration for XeTeX]
 
-% 基础包
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[T1]{fontenc}
+% XeTeX 专用配置 - 更好的 Unicode 支持
+\RequirePackage{fontspec}
+\RequirePackage{xeCJK}  % 专门的中文支持
+
+% 设置中文字体
+\setCJKmainfont{STSong}  % macOS 上的中文字体
+\setCJKsansfont{STHeiti}
+\setCJKmonofont{STFangsong}
+
+% 其他基础包
 \RequirePackage{geometry}
 \RequirePackage{setspace}
 \RequirePackage{hyperref}
