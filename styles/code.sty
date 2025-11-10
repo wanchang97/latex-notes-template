@@ -1,0 +1,35 @@
+% styles/code.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{styles/code}[2024/01/01 Code configuration for notes]
+
+\RequirePackage{listings}
+\RequirePackage{minted}
+
+% 代码样式设置
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+
+\lstset{
+	backgroundcolor=\color{codebg},
+	basicstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	frame=single,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{green!50!black},
+	stringstyle=\color{red},
+	showstringspaces=false
+}
+
+% 编程语言定义
+\lstdefinestyle{python}{
+	language=Python,
+	morekeywords={as, async, await, with, yield}
+}
+
+\lstdefinestyle{javascript}{
+	language=JavaScript,
+	morekeywords={let, const, async, await}
+}
+
+\endinput

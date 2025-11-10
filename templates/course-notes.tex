@@ -1,0 +1,31 @@
+% templates/course-notes.tex
+\documentclass[11pt]{report}
+\usepackage{../styles/notes}
+
+\title{Course Name Notes}
+\author{Your Name}
+\date{Spring 2024}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\chapter{Introduction to Course}
+	\input{chapters/introduction}
+	
+	\chapter{Basic Concepts}
+	\input{chapters/basic-concepts}
+	
+	\chapter{Advanced Topics}
+	\input{chapters/advanced-topics}
+	
+	% 添加更多章节...
+	
+	\appendix
+	\chapter{Additional Resources}
+	\section{Useful Formulas}
+	\section{Reference Materials}
+	
+\end{document}

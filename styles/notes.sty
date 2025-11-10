@@ -1,0 +1,47 @@
+% styles/notes.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{styles/notes}[2024/01/01 Notes-specific configuration]
+
+\RequirePackage{styles/base}
+\RequirePackage{styles/math}
+\RequirePackage{styles/code}
+
+% 笔记特定包
+\RequirePackage{tcolorbox}
+\RequirePackage{marginnote}
+\RequirePackage{titlesec}
+
+% 笔记盒子环境
+\newtcolorbox{note}{
+	colback=blue!5!white,
+	colframe=blue!75!black,
+	fonttitle=\bfseries,
+	title=Note
+}
+
+\newtcolorbox{warning}{
+	colback=red!5!white,
+	colframe=red!75!black,
+	fonttitle=\bfseries,
+	title=Warning
+}
+
+\newtcolorbox{important}{
+	colback=green!5!white,
+	colframe=green!75!black,
+	fonttitle=\bfseries,
+	title=Important
+}
+
+% 章节格式
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% 自定义命令
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\term}[1]{\textbf{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\endinput

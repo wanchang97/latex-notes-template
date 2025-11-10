@@ -1,0 +1,70 @@
+name: Build and Deploy Notes
+
+on:
+push:
+branches: [ main, master ]
+pull_request:
+branches: [ main, master ]
+
+jobs:
+build:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout
+uses: actions/checkout@v4
+
+- name: Setup TeX Live
+uses: xu-cheng/latex-action@v2
+with:
+root_file: notes/**/main.tex
+args: -shell-escape -interaction=nonstopmode
+
+- name: Compile all notes
+run: |
+find notes -name "main.tex" | while read note; do
+dir=$(dirname "$note")
+name=$(basename "$dir")
+cd "$dir"
+latexmk -pdf -interaction=nonstopmode main.tex
+mkdir -p ../../public/notes
+cp main.pdf "../../public/notes/${name}.pdf"
+cd -
+done
+
+- name: Generate index page
+run: |
+cat > public/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Study Notes</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; }
+.note { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
+.date { color: #666; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<h1>My Study Notes</h1>
+<p>Automatically generated from LaTeX source.</p>
+<div id="notes-list">
+EOF
+
+find notes -name "main.tex" | while read note; do
+dir=$(dirname "$note")
+name=$(basename "$dir")
+title=$(grep -m 1 '\\title' "$note" | sed 's/\\title{//' | sed 's/}//' || echo "$name")
+echo "<div class='note'><h3><a href='notes/${name}.pdf'>$title</a></h3></div>" >> public/index.html
+done
+
+cat >> public/index.html << 'EOF'
+</div>
+</body>
+</html>
+EOF
+
+- name: Deploy to GitHub Pages
+uses: peaceiris/actions-gh-pages@v3
+with:
+github_token: ${{ secrets.GITHUB_TOKEN }}
+publish_dir: ./public

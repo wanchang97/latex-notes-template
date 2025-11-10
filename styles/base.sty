@@ -1,0 +1,32 @@
+% styles/base.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{styles/base}[2024/01/01 Base configuration for notes]
+
+% 基础包
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{geometry}
+\RequirePackage{setspace}
+\RequirePackage{hyperref}
+\RequirePackage{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+\RequirePackage{float}
+
+% 页面设置
+\geometry{a4paper, margin=1in}
+\onehalfspacing
+
+% 超链接设置
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=cyan,
+	citecolor=magenta
+}
+
+% 列表设置
+\setlist{nosep}
+
+\endinput

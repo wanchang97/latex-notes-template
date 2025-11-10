@@ -1,0 +1,66 @@
+% templates/single-note.tex
+\documentclass[11pt]{article}
+\usepackage{../styles/notes}
+
+\title{Note Title}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		This note covers key concepts about [topic]. 
+	\end{abstract}
+	
+	\tableofcontents
+	
+	\section{Introduction}
+	
+	Main content here...
+	
+	\section{Key Concepts}
+	
+	\begin{definition}[Important Term]
+		Definition of the term.
+	\end{definition}
+	
+	\begin{theorem}[Main Theorem]
+		The important theorem statement.
+	\end{theorem}
+	
+	\begin{proof}
+		Proof goes here...
+	\end{proof}
+	
+	\begin{example}
+		Example illustration.
+	\end{example}
+	
+	\section{Applications}
+	
+	Practical applications...
+	
+	\begin{note}
+		This is an important note about the content.
+	\end{note}
+	
+	\begin{warning}
+		Be careful with this common mistake.
+	\end{warning}
+	
+	\section{Code Examples}
+	
+	\begin{lstlisting}[style=python, caption=Python Example]
+		import numpy as np
+		
+		def example_function(x):
+		return x ** 2
+	\end{lstlisting}
+	
+	\section{Summary}
+	
+	Key takeaways...
+	
+\end{document}
