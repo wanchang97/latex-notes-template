@@ -48,8 +48,8 @@ jobs:
           # 进入笔记目录编译
           cd "$dir"
           
-          # 设置搜索路径并编译（使用 pdflatex，云端环境已配置好中文）
-          TEXINPUTS="../../styles:" pdflatex -interaction=nonstopmode main.tex
+          # 设置搜索路径并编译（使用 xelatex，云端环境已配置好中文）
+          TEXINPUTS="../../styles:" xelatex -interaction=nonstopmode main.tex
           
           # 检查是否编译成功
           if [ -f "main.pdf" ]; then
