@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.6.30)  11 NOV 2025 09:53
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.6.30)  11 NOV 2025 10:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -169,12 +169,9 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \c@example=\count276
 \c@remark=\count277
 )
-(../../styles/code.sty
+(../../styles/code-simple.sty
+Package: ../../styles/code-simple 2024/01/01 Simple code configuration
 
-LaTeX Warning: You have requested package `../../styles/code',
-               but the package provides `styles/code'.
-
-Package: styles/code 2024/01/01 Code configuration for notes
 (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count278
 \lst@gtempboxa=\box54
@@ -994,11 +991,8 @@ Package hyperref Info: Link coloring ON on input line 10.
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
 LaTeX Font Info:    Trying to load font information for U+msa on input line 13.
+
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1065,12 +1059,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: B8BDD72CEE5984D67551EB026093CC88;585.
  ) 
 Here is how much of TeX's memory you used:
- 27407 strings out of 474773
- 571775 string characters out of 5757724
- 1996839 words of memory out of 5000000
- 49101 multiletter control sequences out of 15000+600000
+ 27390 strings out of 474773
+ 571712 string characters out of 5757724
+ 1984839 words of memory out of 5000000
+ 49084 multiletter control sequences out of 15000+600000
  569094 words of font info for 103 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 109i,6n,121p,541b,1989s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 109i,6n,121p,541b,1978s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on main.pdf (2 pages).

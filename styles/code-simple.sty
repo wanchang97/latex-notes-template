@@ -1,0 +1,31 @@
+% styles/code-simple.sty (备用方案)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{../../styles/code-simple}[2024/01/01 Simple code configuration]
+
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+
+% 基础设置
+\lstset{
+	backgroundcolor=\color{white},
+	basicstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	frame=single,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{green},
+	stringstyle=\color{red},
+	showstringspaces=false,
+	tabsize=4
+}
+
+% 简化版本 - 只使用内置语言
+\lstdefinestyle{python}{language=Python}
+\lstdefinestyle{java}{language=Java}
+\lstdefinestyle{c}{language=C}
+\lstdefinestyle{cpp}{language=C++}
+
+% 对于 JavaScript，使用其他名称
+\lstdefinestyle{js}{language=JavaScript}
+\endinput
