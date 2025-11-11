@@ -1,17 +1,10 @@
-% styles/base-xetex.sty
+% styles/base.sty
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{../../styles/base}[2024/01/01 Base configuration for XeTeX]
+\ProvidesPackage{styles/base}[2024/01/01 Base configuration for notes]
 
-% XeTeX 专用配置 - 更好的 Unicode 支持
-\RequirePackage{fontspec}
-\RequirePackage{xeCJK}  % 专门的中文支持
-
-% 设置中文字体
-\setCJKmainfont{STSong}  % macOS 上的中文字体
-\setCJKsansfont{STHeiti}
-\setCJKmonofont{STFangsong}
-
-% 其他基础包
+% 基础包
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
 \RequirePackage{geometry}
 \RequirePackage{setspace}
 \RequirePackage{hyperref}
@@ -20,6 +13,9 @@
 \RequirePackage{graphicx}
 \RequirePackage{booktabs}
 \RequirePackage{float}
+
+% 中文支持 - 使用 ctex 而不是 fontspec
+\RequirePackage{ctex}
 
 % 页面设置
 \geometry{a4paper, margin=1in}
@@ -37,3 +33,43 @@
 \setlist{nosep}
 
 \endinput
+
+%% styles/base-xetex.sty
+%\NeedsTeXFormat{LaTeX2e}
+%\ProvidesPackage{../../styles/base}[2024/01/01 Base configuration for XeTeX]
+%
+%% XeTeX 专用配置 - 更好的 Unicode 支持
+%\RequirePackage{fontspec}
+%\RequirePackage{xeCJK}  % 专门的中文支持
+%
+%% 设置中文字体
+%\setCJKmainfont{STSong}  % macOS 上的中文字体
+%\setCJKsansfont{STHeiti}
+%\setCJKmonofont{STFangsong}
+%
+%% 其他基础包
+%\RequirePackage{geometry}
+%\RequirePackage{setspace}
+%\RequirePackage{hyperref}
+%\RequirePackage{xcolor}
+%\RequirePackage{enumitem}
+%\RequirePackage{graphicx}
+%\RequirePackage{booktabs}
+%\RequirePackage{float}
+%
+%% 页面设置
+%\geometry{a4paper, margin=1in}
+%\onehalfspacing
+%
+%% 超链接设置
+%\hypersetup{
+%	colorlinks=true,
+%	linkcolor=blue,
+%	urlcolor=cyan,
+%	citecolor=magenta
+%}
+%
+%% 列表设置
+%\setlist{nosep}
+%
+%\endinput
